@@ -1,0 +1,9 @@
+
+*.jpg
+*.gif
+*.png
+*.txt
+chatdata/*
+csrf/*
+jquery-*
+

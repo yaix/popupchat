@@ -1,0 +1,36 @@
+
+This is a simple in page chat that can pop up on a user action, like pressing a "chat now" button or something. The script only reqires jQuery 1.7.x and PHP on the server side together with a writable directory for the chat data files. NO database is needed.
+
+The server side comes with simple CSRF protection to prevent users to initiate chats under random user IDs.
+
+---
+
+CSRF PROTECTION
+
+The chat does not know your users, you need to do the authentification and check if two users are actually allowed to talk to each other. If you find that user "A" may talk to user "B", then you need to set three $_SESSION variables in PHP, containing the two user IDs and a random string token to protect against CSRF attacks:
+
+    $_SESSION['popupchat_csrf'] = CSRF_TOKEN
+    $_SESSION['popupchat_me'] = USER_A_ID
+
+    NOPE --> $_SESSION['popupchat_them'] = USER_B_ID
+
+[ *** NOPE *** Becuase it would prevent the user from running multiple chats in multipe browsers at the same time, because server side it would reuse the same session and only look for the user ID first set.!!! *** ]
+
+Additionally, you must include the same CSRF_TOKEN string and user IDs into the HTML page that you send to the user.
+
+    $('#chatbox').popupchat({
+        csrf: 'CSRF_TOKEN',
+        me: { id:USER_A_ID, nick:'NickUserA', chat:'Me' },
+        them: { id:USER_B_ID, nick:'NickUserB', chat:'NickUserB' },
+    });
+
+That string will be send to the chat's PHP script on each request and compared to the token stored in the $_SESSION variable. Also, the user IDs from the session will be compared to the user variables sent by the client on each request.
+
+---
+
+REMOVE OLD CHAT DATA FILES
+
+From time to time check the access timestamp of all chatdata files and delete all files older than 7 days (or 30 days or so). Do it with a cronjob using find -atime something.
+
+---
+

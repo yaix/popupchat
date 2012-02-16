@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>A jQuery popup chat</title>
+  <link charset="utf-8" rel="stylesheet" href="popupchat.css">
+  <script src="/js/jquery-1.7.1.js"></script>
+ </head>
+ <body>
+  <h2>TYPE YOUR USER ID AND THEIR USER ID TO START THE CHAT:</h2>
+  <form id="chatconf">
+   <p>Your user ID: <input type="text" name="me" value="1" maxlength="10" size="5"></p>
+   <p>Their user ID: <input type="text" name="them" value="2" maxlength="10" size="5"></p>
+   <p><button name="startchat">Start Chat</button><button name="stopchat" disabled>Close</button></p>
+  </form>
+  <hr>
+  <p>This jQuery plugin popup chat.</p>
+ </body>
+ <script>
+
+$('#chatconf').on('submit', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+});
+
+$('#chatconf').on('click', 'button[name="stopchat"]', function(e){
+    $(this).attr('disabled', true);
+    $(this).parents('form').find('button[name="startchat"]').removeAttr('disabled');
+    $('#chatbox').remove();
+});
+
+$('#chatconf').on('click', 'button[name="startchat"]', function(e){
+    $('#chatbox').remove();
+    $(this).attr('disabled', true);
+    $(this).parents('form').find('button[name="stopchat"]').removeAttr('disabled');
+
+    $('head').append('<scri' + 'pt src="popupchat.js"></sc' + 'ript>');
+    $('body').append('<div id="chatbox" class="popupchat opened"></div>');
+    var me = $(this).parents('form').find('input[name="me"]').val();
+    var them = $(this).parents('form').find('input[name="them"]').val()
+    $('#chatbox').popupchat({
+        csrf: '01234567890',
+        me: { id:me, nick:'DasBinIch', chat:'Me' },
+        them: { id:them, nick:'DerAndere', chat:'Theother' },
+    });
+});
+
+ </script>
+</html>

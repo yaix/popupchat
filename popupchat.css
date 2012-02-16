@@ -1,0 +1,63 @@
+div.popupchat { position:fixed; right:15px; width:298px; height:300px; border:1px solid #00a; overflow:hidden; margin:0; padding:0; box-shadow:0 0 10px rgba(0,0,0,0.5); border-radius:5px 5px 0 0; background:#fff; }
+
+div.popupchat.closed { bottom:-275px; opacity:0.3; }
+
+div.popupchat.closed:hover { opacity:0.8; }
+
+div.popupchat.opened { bottom:-1px; }
+
+div.popupchat > div.t { height:15px; background:#007; color:#fff; font:normal 13px/13px sans-serif; padding:4px; margin:1px; border-radius:4px 4px 0 0; }
+
+div.popupchat > div.t:hover {  }
+
+div.popupchat > div.t > span { margin:0 5px; }
+
+div.popupchat.closed > div.t {  }
+
+div.popupchat.opened > div.t {  }
+
+div.popupchat.closed > div.t:hover { cursor:n-resize; }
+
+div.popupchat.opened > div.t:hover { cursor:s-resize; }
+
+div.popupchat.closed > div.t > span {  }
+
+div.popupchat.opened > div.t > span {  }
+
+div.popupchat > div.b { width:294px; height:228px; background:#f0f0f0; padding:3px; margin:0; overflow-x:hidden; overflow-y:scroll; }
+
+div.popupchat > div.b > p { font:normal 13px/13px sans-serif; margin:5px 0; padding:0 }
+
+div.popupchat > div.b > p:first-child { margin-top:0; }
+
+div.popupchat > div.b > p:last-child { margin-bottom:0; }
+
+div.popupchat > div.b > p > span:first-child { margin-right:5px; }
+
+div.popupchat > div.b > p > span:first-child:after { content:':'; }
+
+div.popupchat > div.b > p.initmsg { font-style:italic; color:#a33; }
+
+div.popupchat > div.b > p.me { color:#999; }
+
+div.popupchat > div.b > p.me > span:first-child { color:#888; }
+
+div.popupchat > div.b > p.them { color:#333; }
+
+div.popupchat > div.b > p.them > span:first-child { color:#000; }
+
+
+div.popupchat > div.n { width:294px; height:35px; background:#bbb; padding:3px; margin:0; overflow:hidden; }
+
+div.popupchat > div.n > form > textarea { background:#fff; border:0; outline:0; width:251px; height:31px; float:left; margin:0; padding:2px; font:normal 1em/1em sans-serif; }
+
+div.popupchat > div.n > form > button { width:35px; height:35px; float:right; background:#006; color:#ccf; border:0; box-shadow:inset 0 20px 20px -10px rgba(255, 255, 255, 0.5); }
+
+div.popupchat > div.n > form > textarea:focus,
+div.popupchat > div.n > form > button:focus { outline:2px solid yellow; }
+
+div.popupchat > div.n > form > button:active { box-shadow:inset 0 10px 20px -10px rgba(0, 0, 0, 0.8); }
+
+
+
+
