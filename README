@@ -1,5 +1,7 @@
 
-This is a simple in page chat that can pop up on a user action, like pressing a "chat now" button or something. The script only reqires jQuery 1.7.x and PHP on the server side together with a writable directory for the chat data files. NO database is needed.
+This is a simple in page chat that can pop up on a user action, like pressing a "chat now" button or something. The script only reqires jQuery 1.7.x and PHP on the server side together with a writable directory for the chat data files. No database is needed.
+
+The files chat.html and chat.php contain working examples.
 
 The server side comes with simple CSRF protection to prevent users to initiate chats under random user IDs.
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>A jQuery popup chat</title>
   <link charset="utf-8" rel="stylesheet" href="popupchat.css">
-  <script src="/js/jquery-1.7.1.js"></script>
+  <script src="jquery-1.7.1.js"></script>
  </head>
  <body>
   <h2>TYPE YOUR USER ID AND THEIR USER ID TO START THE CHAT:</h2>
@@ -14,6 +14,7 @@
    <p><button name="startchat">Start Chat</button><button name="stopchat" disabled>Close</button></p>
   </form>
   <hr>
+  <p><strong>This will NOT work! You need to turn off CSRF protection first. Open popupchat.php and set the CSRF constant to false.</strong></p>
   <p>This jQuery plugin popup chat.</p>
  </body>
  <script>

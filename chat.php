@@ -15,7 +15,7 @@ if (empty($_SESSION['popupchat_csrf'])) {
 <html>
 <head>
 <meta charset="utf-8">
-<title>A RESTful drop-in popup chat</title>
+<title>A jQuery popup chat</title>
 <link charset="utf-8" rel="stylesheet" href="popupchat.css">
 <script src="jquery-1.7.1.min.js"></script>
 <script src="popupchat.js"></script>
