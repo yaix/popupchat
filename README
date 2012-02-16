@@ -3,32 +3,41 @@ This is a simple in page chat that can pop up on a user action, like pressing a 
 
 The files chat.html and chat.php contain working examples.
 
-The server side comes with simple CSRF protection to prevent users to initiate chats under random user IDs.
+The server side has a simple CSRF protection to prevent users to initiate chats under random user IDs.
 
 ---
 
-CSRF PROTECTION
+ADDING THE CHAT TO A PAGE
 
-The chat does not know your users, you need to do the authentification and check if two users are actually allowed to talk to each other. If you find that user "A" may talk to user "B", then just set two $_SESSION variables in PHP, one containing "me" user's IDs and the other containing a random string to protect against CSRF attacks:
+The chat does not know your users, so you need to do the authentification and checking if two users are actually allowed to talk to each other. If you find that user "A" may talk to user "B", then simply set two $_SESSION variables in your own PHP script: one containing the "me" user's IDs and the other containing a random string to protect against CSRF attacks:
 
     $_SESSION['popupchat_me'] = USER_ID
     $_SESSION['popupchat_csrf'] = CSRF_TOKEN
 
-Additionally, you must include the same CSRF_TOKEN string and both users' IDs into the HTML page when attaching the chat to a DOM object:
+Additionally, you must include the same CSRF_TOKEN string and both users' IDs ("me" and "them") into the HTML page when attaching the chat to a DOM object:
 
     $('#chatbox').popupchat({
         csrf: 'CSRF_TOKEN',
-        me: { id:USER_A_ID, nick:'NickUserA', chat:'Me' },
-        them: { id:USER_B_ID, nick:'NickUserB', chat:'NickUserB' },
+        me: { id:USER_ID_ME, nick:'NickUserMe', chat:'Me' },
+        them: { id:USER_ID_THEM, nick:'NickUserThem', chat:'NickUserThem' },
     });
 
-The CSRF string will be sent to the server on each request and compared to the token stored in the $_SESSION variable. Also, the "me" user ID in the $_SESSION will be compared to the user variables sent by the client on each request, to make sure a user can not chat under somebody else's user ID.
+The CSRF string will be sent to the server on each request and compared to the token stored in the $_SESSION variable. Also, the "me" user ID in the $_SESSION will be compared to the user data sent by the client on each request, to make sure a user can not chat under somebody else's user ID.
+
+If you want to disable CSRF protection while testing, in "popupchat.php" set the constant CSRF to false.
 
 ---
 
-REMOVE OLD CHAT DATA FILES
+CHAT DATA STORAGE
 
-From time to time check the access timestamp of all chatdata files and delete all files older than 7 days (or 30 days or so). Do it with a cronjob using find -atime something.
+Chat data is stored in plain text files in the directory defined by the constant <DIR_CHATDATA>, with filenames made up by the user IDs of the two chat partners, lower user ID first, followed by an underscore, followed by the larger user ID, followed by the file extention ".txt". 
+
+All chat data files are stored in sub directories, to allow for a larger number of chats being stored. The subdirectory names are made by the first digit of each user ID, again lower user ID first then the larger user ID's first digit.
+
+Example: The chat data for the user IDs "42150" and "720" would be stored in "<DIR_CHATDATA>/74/720_42150.txt".
+
+Each data file holds a maximum chat history of <MAX_MSGS> lines of text. The MAX_MSGS constant can be set in popupchat.php but should not be too large.
+
+TODO: Old data files are never removed, even when the two chat users have not had any conversation in a long time. Removal could be done with a cronjob running find -atime on <DIR_CHATDATA> and delete all files not accessed within the past 30 days or so.
 
 ---
-

@@ -58,21 +58,6 @@ if (CSRF) {
  * The same as the above GET, but adds a new message to the chat.
  */
 
-/*
- * Chat data is stored as plain text files in the directory defined by 
- * the constant <DIR_CHATDATA>, with filenames made by the user IDs of
- * the two chat partners, lower user ID first, followed by an underscore, 
- * followed by the larger user ID, followed by the file extention ".txt". 
- * 
- * All chat data files are stored in sub directories to allow for a larger
- * number of concurrent chats being stored. The subdirectory names are made
- * by the first digit of each user ID, again lower user ID first then the
- * larger user ID's first digit.
- * 
- * Example: The chat data for the user IDs "42150" and "720" would be 
- * stored in "<DIR_CHATDATA>/74/720_42150.txt".
- */
-
 // On error send json.success=0 and json.error message to chat client.
 popupchat_check_input($_REQUEST['me'], $_REQUEST['them'], $_REQUEST['csrf']);
 
